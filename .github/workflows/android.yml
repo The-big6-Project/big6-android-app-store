@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,5 +23,14 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+
+    - name: Create google-services.json file
+      run: cat /home/runner/work/big6-android-app-store/big6-android-app-store/app/google-services.json | base64
+
+    - name: Putting data in google-services.json
+      env:
+        DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: echo $DATA > /home/runner/work/big6-android-app-store/big6-android-app-store/app/google-services.json
+
     - name: Build with Gradle
       run: ./gradlew build
