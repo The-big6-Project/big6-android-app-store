@@ -1,9 +1,9 @@
 name: mobsfscan
 on:
   push:
-    branches: [ master, main ]
+    branches: [ main ]
   pull_request:
-    branches: [ master, main ]
+    branches: [ main ]
   schedule:
     - cron: '25 21 * * 3'
 
@@ -15,7 +15,7 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@v2
     - name: mobsfscan
-      uses: MobSF/mobsfscan@main
+      uses: MobSF/mobsfscan@6bd3e98e2e57d61063b2df335a06a082baeaa1e2
       with:
         args: '. --sarif --output results.sarif || true'
     - name: Upload mobsfscan report
